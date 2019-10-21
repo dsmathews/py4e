@@ -1,15 +1,17 @@
-fname = input("Enter file name: ")
-fh = open(fname)
-lst = list()
-for lines in fh:
-    lines.rstrip()
-    a = lines.split()
-    print(type(a))
-    for word in a:
-        if word not in lst:
-            lst.append(word)
-        else:
-            continue
-lst.sort()
-# print(lst)
-print(type(fh))
+file = "mbox-short.txt"
+fh = open(file)
+d = dict()
+largest = None
+winner = None
+
+for lines in fh :
+    if lines.startswith("From ") :
+        lines.rstrip()
+        a = lines.split()
+        b = a[1]
+        d[b] = d.get(b,0) +1
+for user,count in d.items() :
+    if largest is None or count > largest :
+        largest = count
+        winner = user
+print(winner, largest)
